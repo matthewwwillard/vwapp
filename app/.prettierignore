@@ -1,0 +1,5 @@
+# Generated
+.expo/
+expo-env.d.ts
+# Tool-emitted assets (icon composer output etc.)
+assets/

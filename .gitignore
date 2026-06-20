@@ -1,0 +1,17 @@
+node_modules/
+.env
+*.log
+
+# build / caches
+dist/
+.expo/
+.wrangler/
+.tamagui/
+
+# secrets
+**/.dev.vars
+.instant/
+
+# generated types
+**/expo-env.d.ts
+**/worker-configuration.d.ts

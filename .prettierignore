@@ -1,0 +1,7 @@
+# Root-level invocations only; per-package runs use the package's own file.
+pnpm-lock.yaml
+**/.expo/
+**/expo-env.d.ts
+app/assets/
+**/.wrangler/
+**/worker-configuration.d.ts

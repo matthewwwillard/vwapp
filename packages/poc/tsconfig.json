@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    // POC runs via Node's native TS loader, so imports keep their .ts extension.
+    "allowImportingTsExtensions": true,
+    // This is throwaway POC code (lots of scraped, loosely-typed responses);
+    // relax the strictest flags that just add noise here.
+    "noPropertyAccessFromIndexSignature": false,
+    "exactOptionalPropertyTypes": false
+  },
+  "include": ["src"]
+}

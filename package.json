@@ -1,0 +1,34 @@
+{
+  "name": "vwapp-monorepo",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "pnpm --filter @vwapp/backend run dev",
+    "ios": "pnpm --filter @vwapp/mobile run ios",
+    "test": "pnpm --recursive --parallel --aggregate-output run \"/^(typecheck|lint|format:check)$/\"",
+    "typecheck": "pnpm --recursive --parallel run typecheck",
+    "lint": "pnpm --recursive --parallel run lint",
+    "format": "pnpm --recursive --parallel --aggregate-output run format"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
+    "@tsconfig/strictest": "2",
+    "eslint": "^9.39.4",
+    "eslint-config-expo": "56",
+    "prettier": "^3.8.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "8"
+  },
+  "packageManager": "pnpm@10.33.4",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd",
+      "unrs-resolver"
+    ],
+    "ignoredBuiltDependencies": [
+      "sharp"
+    ]
+  },
+  "private": true
+}

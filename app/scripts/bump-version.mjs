@@ -1,0 +1,37 @@
+// Bump the app version: `pnpm run version patch|minor|major` (default patch).
+// app.json `expo.version` is what ships (EAS manages buildNumber remotely);
+// package.json `version` is kept in sync for consistency.
+import { readFileSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const appDir = dirname(dirname(fileURLToPath(import.meta.url)));
+const part = process.argv[2] ?? "patch";
+const index = ["major", "minor", "patch"].indexOf(part);
+if (index === -1) {
+  console.error(`Usage: pnpm run version [major|minor|patch] (got "${part}")`);
+  process.exit(1);
+}
+
+const appJsonPath = join(appDir, "app.json");
+const appJson = JSON.parse(readFileSync(appJsonPath, "utf8"));
+const current = appJson.expo.version;
+
+const parts = current.split(".").map(Number);
+if (parts.length !== 3 || parts.some(Number.isNaN)) {
+  console.error(`app.json expo.version "${current}" is not semver`);
+  process.exit(1);
+}
+parts[index] += 1;
+for (let i = index + 1; i < 3; i++) parts[i] = 0;
+const next = parts.join(".");
+
+appJson.expo.version = next;
+writeFileSync(appJsonPath, JSON.stringify(appJson, null, 2) + "\n");
+
+const pkgJsonPath = join(appDir, "package.json");
+const pkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf8"));
+pkgJson.version = next;
+writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + "\n");
+
+console.log(`${current} -> ${next}`);

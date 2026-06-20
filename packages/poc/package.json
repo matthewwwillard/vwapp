@@ -1,0 +1,23 @@
+{
+  "name": "@vwapp/poc",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "status": "node --env-file=../../.env src/poc.ts",
+    "lock": "node --env-file=../../.env src/lock-poc.ts",
+    "unlock-debug": "node --env-file=../../.env src/unlock-debug.ts",
+    "explore": "node --env-file=../../.env src/explore.ts",
+    "climate-probe": "node --env-file=../../.env src/climate-probe.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "tough-cookie": "^6.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.2"
+  },
+  "private": true
+}

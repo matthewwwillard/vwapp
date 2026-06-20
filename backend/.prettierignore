@@ -1,0 +1,3 @@
+# Generated
+.wrangler/
+worker-configuration.d.ts

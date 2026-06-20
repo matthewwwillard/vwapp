@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "vwapp-api",
+  "account_id": "41552a3f2adc1c212934e9e3a03a5f27",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  // Poll VW for every stored account every minute (Cloudflare's finest cron
+  // granularity); fresh snapshots land in InstantDB and stream to subscribed
+  // apps, and this is the latency floor for derived notifications (TODO §4).
+  // Plain rvs/ev status reads aren't the tsp-token-rate-limited endpoints, so
+  // 1-min polling is safe. Crons don't fire on a clock in dev: `pnpm dev`
+  // pairs wrangler with a curl loop ticking
+  // "http://localhost:8787/cdn-cgi/handler/scheduled" every 60s.
+  "triggers": { "crons": ["* * * * *"] },
+}
