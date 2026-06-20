@@ -3,8 +3,12 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 Personal app to monitor and (eventually) control the owner's 2025 VW ID. Buzz
-by talking to VW's servers the way the stock myVW app does. Planned/agreed
-future work lives in **TODO.md** — check it before designing anything new.
+by talking to VW's servers the way the stock myVW app does. It is an
+independent re-implementation of VW's official **myVW** iOS app
+(<https://apps.apple.com/us/app/myvw/id1481486650>) — it speaks the same VW
+backend protocol (reverse-engineered from that app; see *VW protocol* below)
+rather than reusing any of its code. Planned/agreed future work lives in
+**TODO.md** — check it before designing anything new.
 
 ## Commands
 
