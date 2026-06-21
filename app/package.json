@@ -8,9 +8,10 @@
     "android": "expo start --android",
     "web": "expo start --web",
     "update": "set -a; [ -f .env ] && . ./.env; set +a; npx -y eas-cli update --branch main --environment production",
-    "publish:ios": "set -a; [ -f .env ] && . ./.env; set +a; npx -y eas-cli build --platform ios --profile production --auto-submit --non-interactive",
-    "version": "node scripts/bump-version.mjs",
-    "typecheck": "tsc --noEmit",
+    "publish:ios": "set -a; [ -f .env ] && . ./.env; set +a; npx -y eas-cli build --platform ios --profile production --non-interactive && node scripts/submit-ios.mts",
+    "submit:ios": "set -a; [ -f .env ] && . ./.env; set +a; node scripts/submit-ios.mts",
+    "version": "node scripts/bump-version.mts",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check ."

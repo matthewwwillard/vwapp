@@ -14,7 +14,9 @@ if (index === -1) {
 }
 
 const appJsonPath = join(appDir, "app.json");
-const appJson = JSON.parse(readFileSync(appJsonPath, "utf8"));
+const appJson = JSON.parse(readFileSync(appJsonPath, "utf8")) as {
+  expo: { version: string };
+};
 const current = appJson.expo.version;
 
 const parts = current.split(".").map(Number);
@@ -22,15 +24,19 @@ if (parts.length !== 3 || parts.some(Number.isNaN)) {
   console.error(`app.json expo.version "${current}" is not semver`);
   process.exit(1);
 }
-parts[index] += 1;
-for (let i = index + 1; i < 3; i++) parts[i] = 0;
-const next = parts.join(".");
+// Bump the chosen part, zero the lower ones — no index mutation so this stays
+// clean under noUncheckedIndexedAccess.
+const next = parts
+  .map((n, i) => (i < index ? n : i === index ? n + 1 : 0))
+  .join(".");
 
 appJson.expo.version = next;
 writeFileSync(appJsonPath, JSON.stringify(appJson, null, 2) + "\n");
 
 const pkgJsonPath = join(appDir, "package.json");
-const pkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf8"));
+const pkgJson = JSON.parse(readFileSync(pkgJsonPath, "utf8")) as {
+  version: string;
+};
 pkgJson.version = next;
 writeFileSync(pkgJsonPath, JSON.stringify(pkgJson, null, 2) + "\n");
 
