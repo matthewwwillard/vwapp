@@ -2,7 +2,7 @@
   "expo": {
     "name": "VW App",
     "slug": "vwapp",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
