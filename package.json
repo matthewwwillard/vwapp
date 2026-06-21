@@ -4,6 +4,9 @@
   "scripts": {
     "dev": "pnpm --filter @vwapp/backend run dev",
     "ios": "pnpm --filter @vwapp/mobile run ios",
+    "version": "node scripts/version.mjs",
+    "publish:ios": "pnpm --filter @vwapp/mobile run publish:ios",
+    "deploy": "pnpm --filter @vwapp/backend run deploy",
     "test": "pnpm --recursive --parallel --aggregate-output run \"/^(typecheck|lint|format:check)$/\"",
     "typecheck": "pnpm --recursive --parallel run typecheck",
     "lint": "pnpm --recursive --parallel run lint",
