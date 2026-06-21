@@ -11,7 +11,6 @@ export default tseslint.config(
       "**/.expo/**",
       "**/.wrangler/**",
       "**/.tamagui/**",
-      "**/scripts/**",
       "**/babel.config.js",
       "**/metro.config.js",
       "**/*.config.js",
