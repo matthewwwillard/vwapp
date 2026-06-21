@@ -26,7 +26,7 @@ account via `CLOUDFLARE_ACCOUNT_ID` in the environment. Apple Maps is optional
 (see *Data freshness* / `isMapsConfigured`).
 
 **Production Worker:** deployed as `vwapp-api` from `backend/` with
-`pnpm --filter @vwapp/backend deploy` (the `deploy` script sources
+`pnpm --filter @vwapp/backend run deploy` (the `deploy` script sources
 `backend/.env` for `CLOUDFLARE_ACCOUNT_ID` so wrangler targets your account) →
 `vwapp-api.<your-subdomain>.workers.dev`. Prod shares dev's InstantDB app +
 `CREDS_ENC_KEY` (secrets = `.dev.vars`, pushed via `wrangler secret bulk`), so
@@ -35,8 +35,9 @@ the cron polls VW for real every minute once deployed.
 **Publishing the app (EAS Update → Expo Go):** owner-specific Expo config is
 env-driven via `app/app.config.ts` (which augments the generic `app.json`):
 `EXPO_OWNER`, `EAS_PROJECT_ID` (→ `extra.eas.projectId` + the `updates.url`), and
-`IOS_BUNDLE_IDENTIFIER`. Publish with `pnpm --filter @vwapp/mobile update --
---message "..."` — the `update` script sources `app/.env` first because
+`IOS_BUNDLE_IDENTIFIER`. Publish with `pnpm --filter @vwapp/mobile run update --
+--message "..."` (the `run` is required — `pnpm update` is pnpm's built-in dep
+updater) — the `update` script sources `app/.env` first because
 `eas-cli`'s project resolver reads `EAS_PROJECT_ID` from the real shell env, not
 from the dotenv-loaded config (`expo` does load it, `eas` does not). The API URL
 is resolved at runtime in

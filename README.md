@@ -72,7 +72,7 @@ app simply shows coordinates instead.
    `backend/`:
    ```bash
    npx wrangler secret bulk .dev.vars              # push secrets to the Worker
-   pnpm --filter @vwapp/backend deploy             # → vwapp-api.<your-subdomain>.workers.dev
+   pnpm --filter @vwapp/backend run deploy         # → vwapp-api.<your-subdomain>.workers.dev
    ```
 4. **Mobile app** — copy `app/.env.example` → `app/.env` and set
    `EXPO_PUBLIC_INSTANT_APP_ID`, `EXPO_PUBLIC_API_URL` (your deployed Worker URL,
