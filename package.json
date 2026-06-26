@@ -1,6 +1,7 @@
 {
   "name": "vwapp-monorepo",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "dev": "pnpm --filter @vwapp/backend run dev",
     "ios": "pnpm --filter @vwapp/mobile run ios",
